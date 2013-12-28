@@ -1,0 +1,10 @@
+Flask==0.10.1
+Flask-Login==0.2.8
+SQLAlchemy==0.8.4
+Flask-SQLAlchemy==1.0
+sqlalchemy-migrate==0.8.2
+Flask-WTF==0.9.4
+Flask-Babel==0.9
+Flask-Mail==0.9
+Flask-Principal==0.4
+flup==1.0.2
