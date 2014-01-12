@@ -14,14 +14,17 @@ JQUERY_CDN_URL = '//ajax.googleapis.com/ajax/libs/jquery/'
 RESET_EXPIRE_MINUTES = 60
 USER_LICENSE_EXPIRE_DAYS = 365
 
+#Flask Security
+SECURITY_LOGIN_USER_TEMPLATE = 'account/login.html'
+
 #mail config
 #DEFAULT_MAIL_SENDER
-#MAIL_SERVER 
+#MAIL_SERVER
 #MAIL_PORT
 #MAIL_USE_TLS : default False
 #MAIL_USE_SSL
 #MAIL_DEBUG : default app.debug
-#MAIL_USERNAME 
+#MAIL_USERNAME
 #MAIL_PASSWORD
 
 LOG_FILE = '%s/app.log' % basedir

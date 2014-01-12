@@ -9,3 +9,5 @@ Flask-Mail==0.9
 Flask-Principal==0.4
 flup==1.0.2
 gunicorn
+flask-security
+Flask-Bootstrap

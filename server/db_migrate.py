@@ -6,8 +6,7 @@ from config import SQLALCHEMY_DATABASE_URI
 from config import SQLALCHEMY_MIGRATE_REPO
 
 #importing models for migration
-from users import models
-from modules import models
+from apps.account import models
 
 migration = SQLALCHEMY_MIGRATE_REPO + '/versions/%03d_migration.py' %\
     (api.db_version(SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO) + 1)
