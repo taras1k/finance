@@ -1,1 +1,1 @@
-web: python db_upgrade.py && cd server &&gunicorn app:app
+web: cd server && python db_upgrade.py &&  gunicorn app:app
