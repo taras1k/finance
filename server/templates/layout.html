@@ -9,6 +9,8 @@
 
     <title>Finance</title>
     <script src="{{ config.JQUERY_CDN_URL }}1.9.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='scripts/knockout-3.0.0.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/transaction.js') }}"></script>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 
@@ -54,9 +56,15 @@
       </div>
     </div>
 
-    <div class="container">
-    {% block body %}
-    {% endblock %}
+    <div class="container" style="margin-top: 60px">
+    <div class="row">
+      {% block body %}
+      {% endblock %}
+    </div>
     </div><!-- /.container -->
+  <script>
+    {% block script %}
+    {% endblock %}
+  </script>
   </body>
 </html>

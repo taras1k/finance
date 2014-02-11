@@ -1,4 +1,49 @@
 {% extends "layout.html" %}
 {% block body %}
-{% trans %}Hello!{% endtrans %}
+
+<form class="form-horizontal" id="expense_input">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Expense</legend>
+
+<!-- Appended Input-->
+<div class="control-group">
+  <label class="control-label" for="appendedtext">amount</label>
+  <div class="controls">
+    <div class="input-append">
+      <input data-bind="value: expenseAmount, valueUpdate: 'afterkeydown'" id="appendedtext" name="appendedtext" class="input-xlarge" placeholder="10" type="text">
+      <span class="add-on">cur</span>
+    </div>
+    <p data-bind="foreach: expenseAmount.validationMessages">
+       <span data-bind="text: $data"></span>
+    </p>
+</div>
+
+<!-- Select Basic -->
+<div class="control-group">
+  <label class="control-label" for="curselect">currency</label>
+  <div class="controls">
+    <select id="curselect" name="curselect"
+            class="input-xlarge" data-bind="value: expenseCurrency">
+      <option>грн</option>
+      <option>$</option>
+    </select>
+  </div>
+</div>
+
+<!-- Button -->
+<div class="control-group">
+  <label class="control-label" for="addbtn"></label>
+  <div class="controls">
+    <button id="addbtn" name="addbtn"
+            class="btn btn-success" data-bind="click: save">
+        Add
+    </button>
+  </div>
+</div>
+</form>
+
+{% endblock %}
+{% block script %}
 {% endblock %}
