@@ -12,13 +12,14 @@ mail.init_app(app)
 db.init_app(app)
 db.app = app
 principal.init_app(app)
-api_manager.init_app(app, flask_sqlalchemy_db=db)
+api_manager.init_app(app)
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 security.init_app(app, datastore=user_datastore)
 security.datastore = user_datastore
 Bootstrap(app)
 
-api_manager.create_api(User, methods=['GET'])
+#loading api
+from apps.account import apis
 
 @app.errorhandler(404)
 def page_not_found(error):
