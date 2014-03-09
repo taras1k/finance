@@ -1,37 +1,56 @@
 $(function(){
-    ko.extenders.required = function(target, overrideMessage) {
-        //add some sub-observables to our observable
-        target.hasError = ko.observable();
-        target.validationMessages = ko.observableArray();
-
-        //define a function to do validation
-        function validate(newValue) {
-           target.hasError(newValue ? false : true);
-           var validationMessage = overrideMessage || "This field is required";
-           target.validationMessages.remove(validationMessage);
-           if(!newValue){
-               target.validationMessages.push(validationMessage);
-           }
-        }
-
-        //initial validation
-        validate(target());
-
-        //validate whenever the value changes
-        target.subscribe(validate);
-
-        //return the original observable
-        return target;
+    var ListExpenseViewModel = function() {
+        var self = this;
+        self.transactions = ko.observableArray();
+        self.get_transactions = function(){
+            $.ajax({
+                method: 'GET',
+                url: '/api/transaction/',
+            }).done(function(data){
+                data['objects'].forEach(function(obj){
+                    self.transactions.push({
+                        id: ko.observable(obj.id),
+                        amount: ko.observable(obj.amount)
+                    });
+                });
+            });
+        };
     };
-    var expenseViewModel = {
-        expenseAmount: ko.observable().extend({required: 'Please input'}),
-        expenseCurrency: ko.observable(),
-        save: function(){
-            console.log(this.expenseAmount.validationMessages())
-            this.expenseAmount.validationMessages.remove('sasa');
-            this.expenseAmount.validationMessages.push('sasa');
+    var AddExpenseViewModel = function() {
+        var self = this;
+        self.expenseAmount = ko.observable(10);
+        self.expenseAmountError = ko.observable();
+        self.expenseCurrency = ko.observable();
+        self.save = function(){
+            self.expenseAmountError('');
+            data = {
+                'amount': self.expenseAmount()
+            }
+            $.ajax({
+                method: 'POST',
+                url: '/api/transaction/',
+                data: ko.toJSON(data),
+                dataType: 'json',
+                contentType: 'application/json'
+            }).done(function(data){
+                console.log(data);
+            }).fail(function(error){
+                var errors = $.parseJSON(error.responseText);
+                if('amount' in errors){
+                    self.expenseAmountError(errors.amount);
+                }
+            });
         }
     };
-    var expense_input = document.getElementById('expense_input');
-    ko.applyBindings(expenseViewModel, expense_input);
+
+    var addExpenseViewModel = new AddExpenseViewModel();
+    var listExpenseViewModel = new ListExpenseViewModel()
+    listExpenseViewModel.get_transactions();
+    var ViewModel = function(){
+        var self = this;
+        self.crete_transaction = addExpenseViewModel;
+        self.list_transaction = listExpenseViewModel;
+    };
+    var viewModel = new ViewModel();
+    ko.applyBindings(viewModel);
 });
