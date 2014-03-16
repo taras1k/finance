@@ -16,7 +16,8 @@ USER_LICENSE_EXPIRE_DAYS = 365
 
 #Flask Security
 SECURITY_LOGIN_USER_TEMPLATE = 'account/login.html'
-
+SECURITY_REGISTER_USER_TEMPLATE = 'account/register_user.html'
+SECURITY_REGISTERABLE = True
 #mail config
 #DEFAULT_MAIL_SENDER
 #MAIL_SERVER

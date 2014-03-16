@@ -33,6 +33,10 @@ $(function(){
                 dataType: 'json',
                 contentType: 'application/json'
             }).done(function(data){
+                listExpenseViewModel.transactions.push({
+                    id: ko.observable(data.id),
+                    amount: ko.observable(data.amount)
+                });
                 console.log(data);
             }).fail(function(error){
                 var errors = $.parseJSON(error.responseText);

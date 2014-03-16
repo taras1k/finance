@@ -7,7 +7,6 @@ Flask-WTF==0.9.4
 Flask-Babel==0.9
 Flask-Mail==0.9
 Flask-Principal==0.4
-flask-peewee
 flup==1.0.2
 simplejson
 gunicorn
